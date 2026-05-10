@@ -389,6 +389,37 @@ class NumberDetector:
         
         valid_numbers = COLOR_TO_NUMBERS.get(detected_color, [])
         
+        # === SPECIAL CASE: Green (0 or 00) - Color is king! ===
+        if detected_color == "green":
+            # For green, we ONLY have two options: 0 or 00
+            # If OCR suggests 00, use shape analysis to confirm
+            if "00" in ocr_candidates or any("00" in c for c in ocr_candidates):
+                if self._looks_like_double_zero(image):
+                    log.debug("[Vision] ✓ Detected 00 (green + OCR says 00)")
+                    return ("00", "green")
+            
+            # Check if ANY OCR candidate contains "0"
+            has_zero = any("0" in c for c in ocr_candidates if c)
+            
+            # If we see double-zero shape, return 00
+            if self._looks_like_double_zero(image):
+                log.debug("[Vision] ✓ Detected 00 (green + double zero shape)")
+                return ("00", "green")
+            
+            # Otherwise default to single 0 (most common)
+            if has_zero or not ocr_candidates:
+                log.debug("[Vision] ✓ Detected 0 (green)")
+                return ("0", "green")
+            
+            # Fallback: try to find any valid green number from OCR
+            for candidate in ocr_candidates:
+                if candidate in valid_numbers:
+                    return (candidate, "green")
+            
+            # Last resort: just return 0 for green
+            return ("0", "green")
+        
+        # === For red/black: need OCR confirmation ===
         if not ocr_candidates:
             log.debug("[Vision] No OCR candidates, color={}".format(detected_color))
             return None
@@ -400,24 +431,6 @@ class NumberDetector:
             if candidate in valid_numbers:
                 log.debug("[Vision] ✓ Exact match: {} is {}".format(candidate, detected_color))
                 return (candidate, detected_color)
-        
-        # === Priority 2: Handle special cases ===
-        
-        # Special: 00 detection
-        if detected_color == "green":
-            # Check if image looks like double zero
-            if self._looks_like_double_zero(image):
-                log.debug("[Vision] ✓ Detected 00 (green + double zero shape)")
-                return ("00", "green")
-            else:
-                # Single 0 - but check OCR for hints
-                # If OCR strongly suggests "00", use that
-                for candidate in ocr_candidates:
-                    if candidate == "00" or candidate == "0":
-                        pass  # Both are valid green
-                
-                # Default to single 0 unless it clearly looks like 00
-                return ("0", "green")
         
         # === Priority 3: Find similar number with correct color ===
         for candidate in ocr_candidates:
@@ -437,11 +450,11 @@ class NumberDetector:
                             candidate, possible))
                         return (possible, detected_color)
         
-        # === Priority 5: Structural analysis for 1/7/11 problem ===
+        # === Priority 5: Structural analysis for 1/7 problem ===
         structure = self._analyze_structure(image)
         
         if detected_color == "red":
-            # Red numbers with similar shapes: 1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36
+            # Red single-digit numbers that look like 1: 1, 7
             if structure["is_single_stroke"]:
                 if structure["has_top_bar"]:
                     return ("7", "red")  # 7 has horizontal top
@@ -449,23 +462,29 @@ class NumberDetector:
                     return ("1", "red")  # 1 is just vertical
         
         elif detected_color == "black":
-            # Black numbers: 2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35
+            # Black numbers: check for 11 (two strokes) or other shapes
             if structure["is_double_stroke"]:
                 return ("11", "black")  # Two vertical strokes
-            elif structure["is_single_stroke"]:
-                if structure["has_top_bar"]:
-                    return ("17", "black")  # Check if it looks like 17
-                else:
-                    return ("4", "black")  # Could be 4 misread as 1
         
-        # === Fallback: Trust color, use first valid similar ===
-        for candidate in ocr_candidates:
-            # Just find ANY number with the right color
-            similar = find_similar_numbers(candidate, detected_color)
-            if similar:
-                log.warning("[Vision] Fallback match: {} → {} (forced color match)".format(
-                    candidate, similar[0]))
-                return (similar[0], detected_color)
+        # === Fallback: Try harder with relaxed matching ===
+        # If we have OCR candidates but none matched, try to find ANY valid number of this color
+        # This handles cases where OCR is completely wrong but color is correct
+        if ocr_candidates and valid_numbers:
+            # Just pick the most likely based on first digit
+            first_digit = ocr_candidates[0][0] if ocr_candidates[0] else None
+            if first_digit:
+                # Find numbers of this color starting with this digit
+                for num in valid_numbers:
+                    if num.startswith(first_digit):
+                        log.warning("[Vision] Fallback: using {} (starts with {})".format(
+                            num, first_digit))
+                        return (num, detected_color)
+            
+            # Last resort: return first valid number of this color
+            # This should RARELY happen - only when OCR is completely broken
+            log.warning("[Vision] CRITICAL FALLBACK: using first valid {} number: {}".format(
+                detected_color, valid_numbers[0]))
+            return (valid_numbers[0], detected_color)
         
         log.warning("[Vision] No valid match found for {} with color {}".format(
             ocr_candidates, detected_color))
