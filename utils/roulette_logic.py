@@ -86,6 +86,8 @@ def find_similar_numbers(ocr_text: str, detected_color: str) -> list:
     """
     Find valid numbers that could match OCR result + color.
     Returns list of possible numbers sorted by likelihood.
+    
+    IMPORTANT: Only returns numbers that match the detected_color!
     """
     valid_numbers = COLOR_TO_NUMBERS.get(detected_color, [])
     
@@ -98,25 +100,32 @@ def find_similar_numbers(ocr_text: str, detected_color: str) -> list:
     if ocr_text in valid_numbers:
         candidates.append((ocr_text, 100))
     
-    # Similar looking digits
+    # Similar looking digits - MUST FILTER BY COLOR
     similar_map = {
         "0": ["0", "6", "8", "9"],
-        "1": ["1", "7", "4"],
+        "1": ["1", "7"],  # Removed "4" - it's black, not red!
         "2": ["2", "7"],
         "3": ["3", "8"],
-        "4": ["4", "1", "9"],
+        "4": ["4", "1", "9"],  # Will be filtered by color below
         "5": ["5", "6"],
         "6": ["6", "0", "8", "5"],
         "7": ["7", "1", "2"],
         "8": ["8", "0", "3", "6"],
-        "9": ["9", "0", "4"],
+        "9": ["9", "0", "4"],  # Will be filtered by color below
     }
     
     # For single digit OCR
     if len(ocr_text) == 1:
         for similar in similar_map.get(ocr_text, []):
+            # CRITICAL: Only accept if it matches the detected color
             if similar in valid_numbers and similar != ocr_text:
-                candidates.append((similar, 80))
+                score = 80
+                # Boost score if visually very similar
+                if ocr_text == "1" and similar == "7":
+                    score = 90
+                elif ocr_text == "7" and similar == "1":
+                    score = 90
+                candidates.append((similar, score))
     
     # For double digit OCR - try variations
     if len(ocr_text) == 2:
@@ -139,13 +148,13 @@ def find_similar_numbers(ocr_text: str, detected_color: str) -> list:
         if d2 in valid_numbers:
             candidates.append((d2, 60))
         
-        # Similar first digit
+        # Similar first digit - MUST MATCH COLOR
         for sim1 in similar_map.get(d1, []):
             num = sim1 + d2
             if num in valid_numbers and num != ocr_text:
                 candidates.append((num, 50))
         
-        # Similar second digit
+        # Similar second digit - MUST MATCH COLOR
         for sim2 in similar_map.get(d2, []):
             num = d1 + sim2
             if num in valid_numbers and num != ocr_text:

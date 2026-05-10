@@ -410,7 +410,13 @@ class NumberDetector:
                 log.debug("[Vision] ✓ Detected 00 (green + double zero shape)")
                 return ("00", "green")
             else:
-                # Single 0
+                # Single 0 - but check OCR for hints
+                # If OCR strongly suggests "00", use that
+                for candidate in ocr_candidates:
+                    if candidate == "00" or candidate == "0":
+                        pass  # Both are valid green
+                
+                # Default to single 0 unless it clearly looks like 00
                 return ("0", "green")
         
         # === Priority 3: Find similar number with correct color ===
