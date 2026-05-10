@@ -10,12 +10,31 @@ from PyQt5.QtWidgets import QApplication, QMessageBox
 from PyQt5.QtCore import QTimer
 
 from logger import log
+
+# Try to fix DLL paths before importing torch
+try:
+    import fix_torch
+except ImportError:
+    pass
+
 from capture.screen_capture import ScreenCapture
 from vision.number_detector import NumberDetector
 from vision.spin_state_detector import NumberCaptureTrigger, SpinStateDetector
 from data.database import SpinDatabase
-from ml.trainer import RouletteTrainer
-from ml.predictor import RoulettePredictor, get_color
+
+# Make ML optional since we now use template matching
+try:
+    from ml.trainer import RouletteTrainer
+    from ml.predictor import RoulettePredictor, get_color
+    ML_AVAILABLE = True
+except (ImportError, OSError) as e:
+    log.warning(f"ML modules not available: {e}")
+    log.warning("Continuing without ML prediction (template matching still works)")
+    ML_AVAILABLE = False
+    RouletteTrainer = None
+    RoulettePredictor = None
+    get_color = None
+
 from gui.overlay import OverlayWindow, SpinWorker, HotkeyWorker
 from autobet.auto_clicker import AutoClicker
 
@@ -35,8 +54,15 @@ class RouletteApp:
         self.state_detector = SpinStateDetector()
         self.capture_trigger = NumberCaptureTrigger(strategy="smart")
         self.database = SpinDatabase()
-        self.trainer = RouletteTrainer({"sequence_length": 20})
-        self.predictor = RoulettePredictor(self.trainer)
+        
+        # ML components (optional)
+        if ML_AVAILABLE:
+            self.trainer = RouletteTrainer({"sequence_length": 20})
+            self.predictor = RoulettePredictor(self.trainer)
+        else:
+            self.trainer = None
+            self.predictor = None
+        
         self.auto_clicker = AutoClicker()
 
         # GUI
@@ -192,6 +218,8 @@ class RouletteApp:
         log.info("[Main] Recorded: {} ({}) | Total: {}".format(number, color, total))
 
     def _update_predictions(self):
+        if not ML_AVAILABLE or self.predictor is None:
+            return
         recent = self.database.get_recent_numbers(50)
         if recent:
             recs, confidence = self.predictor.get_recommendations(recent)
@@ -262,7 +290,8 @@ class RouletteApp:
             self.window.update_status("Need 50+ spins to train")
             return
 
-        loss = self.trainer.train(numbers, epochs=30)
+        if ML_AVAILABLE and self.trainer:
+            loss = self.trainer.train(numbers, epochs=30)
         if loss >= 0:
             self.window.update_status("Training done! Loss: {:.4f}".format(loss))
         else:
@@ -297,7 +326,8 @@ class RouletteApp:
 
     def _execute_autobet(self):
         recent = self.database.get_recent_numbers(50)
-        recs, _ = self.predictor.get_recommendations(recent)
+        if ML_AVAILABLE and self.predictor:
+                recs, _ = self.predictor.get_recommendations(recent)
 
         if recs:
             self.auto_clicker.place_bets(recs[:3])
@@ -357,6 +387,10 @@ class RouletteApp:
             log.info("[Main] History cleared")
 
     def _clear_model(self):
+        if not ML_AVAILABLE:
+            self.window.update_status("ML not available")
+            return
+            
         reply = QMessageBox.question(
             self.window, "Confirm",
             "Reset the trained model?",
@@ -376,7 +410,12 @@ class RouletteApp:
             self.window.update_status("Model reset")
 
     def _on_manual_input(self, number: str):
-        color = get_color(int(number) if number != "00" else 0)
+        if get_color is None:
+            # Fallback color detection without ML
+            from utils.roulette_logic import get_number_color
+            color = get_number_color(int(number) if number != "00" else 0)
+        else:
+            color = get_color(int(number) if number != "00" else 0)
         self._record_spin(number, color, source="manual")
         self.window.update_status("Manual: {} ({})".format(number, color))
 
