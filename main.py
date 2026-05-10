@@ -12,6 +12,7 @@ from PyQt5.QtCore import QTimer
 from logger import log
 from capture.screen_capture import ScreenCapture
 from vision.number_detector import NumberDetector
+from vision.spin_state_detector import NumberCaptureTrigger, SpinStateDetector
 from data.database import SpinDatabase
 from ml.trainer import RouletteTrainer
 from ml.predictor import RoulettePredictor, get_color
@@ -31,6 +32,8 @@ class RouletteApp:
         # Components
         self.capture = ScreenCapture()
         self.detector = NumberDetector(debug=True)
+        self.state_detector = SpinStateDetector()
+        self.capture_trigger = NumberCaptureTrigger(strategy="smart")
         self.database = SpinDatabase()
         self.trainer = RouletteTrainer({"sequence_length": 20})
         self.predictor = RoulettePredictor(self.trainer)
@@ -55,10 +58,11 @@ class RouletteApp:
         # Wire up buttons
         self._connect_signals()
 
-        # Detection worker
-        self.worker = SpinWorker(self.capture, self.detector, interval_ms=800)
+        # Detection worker - starts PAUSED initially
+        self.worker = SpinWorker(self.capture, self.detector, self.capture_trigger, interval_ms=500)
         self.worker.number_detected.connect(self._on_number_detected)
         self.worker.status_update.connect(self.window.update_status)
+        self.worker.paused = True  # Start paused, user must press START
         self.worker.start()
 
         # Hotkey worker
@@ -71,13 +75,15 @@ class RouletteApp:
         self._update_autobet_display()
         self._load_recent_history()
 
-        status = "Ready! F8=SelectRegion F2=Manual F3=Force F4=Pause"
+        status = "Ready! Press START to begin detection. F8=SelectRegion F2=Manual F3=Force"
         if not self.capture.is_configured():
             status = "⚠️ FIRST: Press F8 to select where the result number appears!"
         self.window.update_status(status)
-        log.info("Application ready!")
+        self.window.update_detection_status(False)  # Show OFF state
+        log.info("Application ready! Waiting for user to press START...")
 
     def _connect_signals(self):
+        self.window.btn_start.clicked.connect(self._toggle_detection_start)
         self.window.btn_force.clicked.connect(self._force_capture)
         self.window.btn_pause.clicked.connect(self._toggle_detection)
         self.window.btn_train.clicked.connect(self._train_model)
@@ -217,7 +223,30 @@ class RouletteApp:
             log.error("Force capture: " + str(e))
             self.window.update_status("Error: " + str(e))
 
+    def _toggle_detection_start(self):
+        """Toggle detection on/off with START/STOP button"""
+        if self.worker.paused:
+            # Start detection
+            self.worker.paused = False
+            self.window.update_detection_status(True)
+            self.window.update_status("🔍 Scanning for results... Press STOP to pause")
+            log.info("[Main] Detection STARTED")
+            
+            # Force immediate capture after starting
+            QTimer.singleShot(500, self._force_capture)
+        else:
+            # Stop detection
+            self.worker.paused = True
+            self.window.update_detection_status(False)
+            self.window.update_status("⏸️ Detection stopped. Press START to resume.")
+            log.info("[Main] Detection STOPPED")
+
     def _toggle_detection(self):
+        """Pause/Resume detection (only available when running)"""
+        if self.worker.paused:
+            # Currently stopped, can't pause
+            return
+            
         paused = self.worker.toggle_pause()
         if paused:
             self.window.btn_pause.setText("[F4] Resume")
@@ -367,6 +396,15 @@ class RouletteApp:
         }
         if action in actions:
             actions[action]()
+    
+    def _start_detection_hotkey(self):
+        """Handle F4 hotkey for starting/stopping detection when not running"""
+        if self.worker.paused and not hasattr(self, '_detection_started'):
+            # If completely stopped, use start/stop toggle
+            self._toggle_detection_start()
+        else:
+            # If running, use pause/resume
+            self._toggle_detection()
 
     def run(self):
         return self.app.exec_()

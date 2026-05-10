@@ -18,10 +18,11 @@ class SpinWorker(QThread):
     number_detected = pyqtSignal(str, str)
     status_update = pyqtSignal(str)
 
-    def __init__(self, screen_capture, number_detector, interval_ms=800):
+    def __init__(self, screen_capture, number_detector, capture_trigger=None, interval_ms=500):
         super().__init__()
         self.screen_capture = screen_capture
         self.number_detector = number_detector
+        self.capture_trigger = capture_trigger
         self.interval = interval_ms / 1000.0
         self.running = True
         self.paused = False
@@ -32,11 +33,24 @@ class SpinWorker(QThread):
                 try:
                     img = self.screen_capture.capture_result_region()
                     if img is not None and img.size > 0:
-                        result = self.number_detector.process_frame(img)
-                        if result:
-                            number, color = result
-                            self.number_detected.emit(number, color)
-                            self.status_update.emit("NEW: " + number + " (" + color + ")")
+                        # Use capture trigger if available (smart detection)
+                        if self.capture_trigger:
+                            # First detect color to pass to trigger
+                            temp_color = self.number_detector._detect_color_robust(img)
+                            
+                            if self.capture_trigger.should_capture(img, temp_color):
+                                result = self.number_detector.process_frame(img)
+                                if result:
+                                    number, color = result
+                                    self.number_detected.emit(number, color)
+                                    self.status_update.emit("NEW: " + number + " (" + color + ")")
+                        else:
+                            # Legacy mode: direct detection
+                            result = self.number_detector.process_frame(img)
+                            if result:
+                                number, color = result
+                                self.number_detected.emit(number, color)
+                                self.status_update.emit("NEW: " + number + " (" + color + ")")
                 except Exception as e:
                     log.error("[Worker] " + str(e))
             time.sleep(self.interval)
@@ -275,6 +289,33 @@ class OverlayWindow(QMainWindow):
 
         layout.addWidget(self.autobet_frame)
 
+        # === Detection Control ===
+        detection_frame = QFrame()
+        detection_frame.setStyleSheet("background: #1e3a5f; border-radius: 5px; padding: 5px;")
+        detection_layout = QVBoxLayout(detection_frame)
+        detection_layout.setSpacing(4)
+
+        self.btn_start = QPushButton("▶️ START Detection")
+        self.btn_start.setFixedHeight(40)
+        self.btn_start.setStyleSheet("""
+            QPushButton {
+                background: #27ae60;
+                font-size: 14px;
+                font-weight: bold;
+            }
+            QPushButton:hover {
+                background: #2ecc71;
+            }
+        """)
+        detection_layout.addWidget(self.btn_start)
+
+        self.detection_status = QLabel("⏸️ Detection: OFF")
+        self.detection_status.setAlignment(Qt.AlignCenter)
+        self.detection_status.setStyleSheet("font-size: 12px; padding: 4px; color: #e74c3c;")
+        detection_layout.addWidget(self.detection_status)
+
+        layout.addWidget(detection_frame)
+
         # === Control buttons ===
         btn_frame = QFrame()
         btn_layout = QVBoxLayout(btn_frame)
@@ -286,9 +327,11 @@ class OverlayWindow(QMainWindow):
         row1.addWidget(self.btn_manual)
 
         self.btn_force = QPushButton("[F3] Force")
+        self.btn_force.clicked.connect(self._force_capture)
         row1.addWidget(self.btn_force)
 
         self.btn_pause = QPushButton("[F4] Pause")
+        self.btn_pause.setEnabled(False)
         row1.addWidget(self.btn_pause)
         btn_layout.addLayout(row1)
 
@@ -425,6 +468,40 @@ class OverlayWindow(QMainWindow):
 
     def get_warmup_settings(self) -> tuple:
         return (self.warmup_checkbox.isChecked(), self.warmup_spinbox.value())
+
+    def update_detection_status(self, is_running: bool):
+        """Update detection status display"""
+        if is_running:
+            self.detection_status.setText("▶️ Detection: ON")
+            self.detection_status.setStyleSheet("font-size: 12px; padding: 4px; color: #2ecc71;")
+            self.btn_start.setText("⏹️ STOP Detection")
+            self.btn_start.setStyleSheet("""
+                QPushButton {
+                    background: #c0392b;
+                    font-size: 14px;
+                    font-weight: bold;
+                }
+                QPushButton:hover {
+                    background: #e74c3c;
+                }
+            """)
+            self.btn_pause.setEnabled(True)
+        else:
+            self.detection_status.setText("⏸️ Detection: OFF")
+            self.detection_status.setStyleSheet("font-size: 12px; padding: 4px; color: #e74c3c;")
+            self.btn_start.setText("▶️ START Detection")
+            self.btn_start.setStyleSheet("""
+                QPushButton {
+                    background: #27ae60;
+                    font-size: 14px;
+                    font-weight: bold;
+                }
+                QPushButton:hover {
+                    background: #2ecc71;
+                }
+            """)
+            self.btn_pause.setEnabled(False)
+            self.btn_pause.setText("[F4] Pause")
 
     def get_bet_delay(self) -> int:
         return self.delay_spinbox.value()
