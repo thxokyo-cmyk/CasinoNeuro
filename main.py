@@ -410,6 +410,11 @@ class RouletteApp:
             self.window.update_status("Model reset")
 
     def _on_manual_input(self, number: str):
+        # Check if this is a force capture signal
+        if number == "FORCE_CAPTURE":
+            self._force_capture()
+            return
+            
         if get_color is None:
             # Fallback color detection without ML
             from utils.roulette_logic import get_number_color
