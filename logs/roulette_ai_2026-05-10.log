@@ -1,0 +1,199 @@
+2026-05-10 15:19:39 [INFO] RouletteAI: ============================================================
+2026-05-10 15:19:39 [INFO] RouletteAI: Log file: /workspace/logs/roulette_ai_2026-05-10.log
+2026-05-10 15:19:39 [INFO] RouletteAI: ============================================================
+2026-05-10 15:19:39 [INFO] RouletteAI: [Vision] Initializing Number Detector v5.0 (Template Matching)...
+2026-05-10 15:19:39 [INFO] RouletteAI: [TemplateMatcher] Generated 264 templates
+2026-05-10 15:19:39 [INFO] RouletteAI: [Vision] Detector ready! Template matching enabled.
+2026-05-10 15:20:39 [INFO] RouletteAI: ============================================================
+2026-05-10 15:20:39 [INFO] RouletteAI: Log file: /workspace/logs/roulette_ai_2026-05-10.log
+2026-05-10 15:20:39 [INFO] RouletteAI: ============================================================
+2026-05-10 15:21:56 [INFO] RouletteAI: ============================================================
+2026-05-10 15:21:56 [INFO] RouletteAI: Log file: /workspace/logs/roulette_ai_2026-05-10.log
+2026-05-10 15:21:56 [INFO] RouletteAI: ============================================================
+2026-05-10 15:22:05 [INFO] RouletteAI: ============================================================
+2026-05-10 15:22:05 [INFO] RouletteAI: Log file: /workspace/logs/roulette_ai_2026-05-10.log
+2026-05-10 15:22:05 [INFO] RouletteAI: ============================================================
+2026-05-10 15:22:13 [INFO] RouletteAI: [ML] PyTorch loaded (CPU mode)
+2026-05-10 15:23:11 [INFO] RouletteAI: ============================================================
+2026-05-10 15:23:11 [INFO] RouletteAI: Log file: /workspace/logs/roulette_ai_2026-05-10.log
+2026-05-10 15:23:11 [INFO] RouletteAI: ============================================================
+2026-05-10 15:23:15 [INFO] RouletteAI: [ML] PyTorch loaded (CPU mode)
+2026-05-10 15:23:19 [INFO] RouletteAI: ============================================================
+2026-05-10 15:23:19 [INFO] RouletteAI: Log file: /workspace/logs/roulette_ai_2026-05-10.log
+2026-05-10 15:23:19 [INFO] RouletteAI: ============================================================
+2026-05-10 15:23:24 [INFO] RouletteAI: [ML] PyTorch loaded (CPU mode)
+2026-05-10 15:23:33 [INFO] RouletteAI: ============================================================
+2026-05-10 15:23:33 [INFO] RouletteAI: Log file: /workspace/logs/roulette_ai_2026-05-10.log
+2026-05-10 15:23:33 [INFO] RouletteAI: ============================================================
+2026-05-10 15:23:33 [INFO] RouletteAI: [Vision] Initializing Number Detector v5.0 (Template Matching)...
+2026-05-10 15:23:33 [INFO] RouletteAI: [TemplateMatcher] Generated 264 templates
+2026-05-10 15:23:33 [INFO] RouletteAI: [Vision] Detector ready! Template matching enabled.
+2026-05-10 15:23:33 [INFO] RouletteAI: [SpinState] Initializing...
+2026-05-10 15:23:33 [INFO] RouletteAI: [SpinState] Ready!
+2026-05-10 15:23:33 [INFO] RouletteAI: [SpinState] Initializing...
+2026-05-10 15:23:33 [INFO] RouletteAI: [SpinState] Ready!
+2026-05-10 15:23:33 [INFO] RouletteAI: [CaptureTrigger] Initialized with strategy: smart
+2026-05-10 15:23:41 [INFO] RouletteAI: ============================================================
+2026-05-10 15:23:41 [INFO] RouletteAI: Log file: /workspace/logs/roulette_ai_2026-05-10.log
+2026-05-10 15:23:41 [INFO] RouletteAI: ============================================================
+2026-05-10 15:23:41 [INFO] RouletteAI: [Vision] Initializing Number Detector v5.0 (Template Matching)...
+2026-05-10 15:23:41 [INFO] RouletteAI: [TemplateMatcher] Generated 264 templates
+2026-05-10 15:23:41 [INFO] RouletteAI: [Vision] Detector ready! Template matching enabled.
+2026-05-10 15:26:21 [INFO] RouletteAI: ============================================================
+2026-05-10 15:26:21 [INFO] RouletteAI: Log file: /workspace/logs/roulette_ai_2026-05-10.log
+2026-05-10 15:26:21 [INFO] RouletteAI: ============================================================
+2026-05-10 15:26:23 [INFO] RouletteAI: ============================================================
+2026-05-10 15:26:23 [INFO] RouletteAI: Log file: /workspace/logs/roulette_ai_2026-05-10.log
+2026-05-10 15:26:23 [INFO] RouletteAI: ============================================================
+2026-05-10 15:26:28 [INFO] RouletteAI: [ML] PyTorch loaded (CPU mode)
+2026-05-10 15:26:32 [INFO] RouletteAI: ============================================================
+2026-05-10 15:26:32 [INFO] RouletteAI: Log file: /workspace/logs/roulette_ai_2026-05-10.log
+2026-05-10 15:26:32 [INFO] RouletteAI: ============================================================
+2026-05-10 15:26:32 [INFO] RouletteAI: [TemplateMatcher] Generated 264 templates
+2026-05-10 15:26:59 [INFO] RouletteAI: ============================================================
+2026-05-10 15:26:59 [INFO] RouletteAI: Log file: /workspace/logs/roulette_ai_2026-05-10.log
+2026-05-10 15:26:59 [INFO] RouletteAI: ============================================================
+2026-05-10 15:26:59 [INFO] RouletteAI: [Vision] Initializing Number Detector v5.0 (Template Matching)...
+2026-05-10 15:26:59 [INFO] RouletteAI: [TemplateMatcher] Generated 264 templates
+2026-05-10 15:26:59 [INFO] RouletteAI: [Vision] Detector ready! Template matching enabled.
+2026-05-10 15:26:59 [DEBUG] RouletteAI: [Vision] ✓ Detected 0 (green + template match)
+2026-05-10 15:26:59 [INFO] RouletteAI: [Vision] FORCE: 0 (green)
+2026-05-10 15:26:59 [DEBUG] RouletteAI: [Vision] ✓ Detected 0 (green + template match)
+2026-05-10 15:26:59 [INFO] RouletteAI: [Vision] FORCE: 0 (green)
+2026-05-10 15:26:59 [DEBUG] RouletteAI: [Vision] Template candidates: ['1'], color=red
+2026-05-10 15:26:59 [DEBUG] RouletteAI: [Vision] ✓ Exact match: 1 is red
+2026-05-10 15:26:59 [INFO] RouletteAI: [Vision] FORCE: 1 (red)
+2026-05-10 15:26:59 [DEBUG] RouletteAI: [Vision] Template candidates: ['4'], color=black
+2026-05-10 15:26:59 [DEBUG] RouletteAI: [Vision] ✓ Exact match: 4 is black
+2026-05-10 15:26:59 [INFO] RouletteAI: [Vision] FORCE: 4 (black)
+2026-05-10 15:27:21 [INFO] RouletteAI: ============================================================
+2026-05-10 15:27:21 [INFO] RouletteAI: Log file: /workspace/logs/roulette_ai_2026-05-10.log
+2026-05-10 15:27:21 [INFO] RouletteAI: ============================================================
+2026-05-10 15:27:21 [INFO] RouletteAI: [Vision] Initializing Number Detector v5.0 (Template Matching)...
+2026-05-10 15:27:21 [INFO] RouletteAI: [TemplateMatcher] Generated 264 templates
+2026-05-10 15:27:21 [INFO] RouletteAI: [Vision] Detector ready! Template matching enabled.
+2026-05-10 15:27:21 [DEBUG] RouletteAI: [Vision] ✓ Detected 0 (green + template match)
+2026-05-10 15:27:21 [INFO] RouletteAI: [Vision] FORCE: 0 (green)
+2026-05-10 15:27:21 [DEBUG] RouletteAI: [Vision] ✓ Detected 0 (green + template match)
+2026-05-10 15:27:21 [INFO] RouletteAI: [Vision] FORCE: 0 (green)
+2026-05-10 15:27:42 [INFO] RouletteAI: ============================================================
+2026-05-10 15:27:42 [INFO] RouletteAI: Log file: /workspace/logs/roulette_ai_2026-05-10.log
+2026-05-10 15:27:42 [INFO] RouletteAI: ============================================================
+2026-05-10 15:27:42 [INFO] RouletteAI: [Vision] Initializing Number Detector v5.0 (Template Matching)...
+2026-05-10 15:27:42 [INFO] RouletteAI: [TemplateMatcher] Generated 264 templates
+2026-05-10 15:27:42 [INFO] RouletteAI: [Vision] Detector ready! Template matching enabled.
+2026-05-10 15:27:42 [DEBUG] RouletteAI: [Vision] ✓ Detected 0 (green + template match)
+2026-05-10 15:27:42 [INFO] RouletteAI: [Vision] FORCE: 0 (green)
+2026-05-10 15:27:42 [DEBUG] RouletteAI: [Vision] ✓ Detected 0 (green + template match)
+2026-05-10 15:27:42 [INFO] RouletteAI: [Vision] FORCE: 0 (green)
+2026-05-10 15:27:42 [DEBUG] RouletteAI: [Vision] Looks like 00: two round shapes with gap
+2026-05-10 15:28:05 [INFO] RouletteAI: ============================================================
+2026-05-10 15:28:05 [INFO] RouletteAI: Log file: /workspace/logs/roulette_ai_2026-05-10.log
+2026-05-10 15:28:05 [INFO] RouletteAI: ============================================================
+2026-05-10 15:28:05 [INFO] RouletteAI: [Vision] Initializing Number Detector v5.0 (Template Matching)...
+2026-05-10 15:28:05 [INFO] RouletteAI: [TemplateMatcher] Generated 264 templates
+2026-05-10 15:28:05 [INFO] RouletteAI: [Vision] Detector ready! Template matching enabled.
+2026-05-10 15:28:05 [DEBUG] RouletteAI: [Vision] ✓ Detected 0 (green + template match)
+2026-05-10 15:28:05 [INFO] RouletteAI: [Vision] FORCE: 0 (green)
+2026-05-10 15:28:05 [DEBUG] RouletteAI: [Vision] Looks like 00: two round shapes with gap
+2026-05-10 15:28:05 [DEBUG] RouletteAI: [Vision] ✓ Detected 00 (green + double zero shape)
+2026-05-10 15:28:05 [INFO] RouletteAI: [Vision] FORCE: 00 (green)
+2026-05-10 15:28:19 [INFO] RouletteAI: ============================================================
+2026-05-10 15:28:19 [INFO] RouletteAI: Log file: /workspace/logs/roulette_ai_2026-05-10.log
+2026-05-10 15:28:19 [INFO] RouletteAI: ============================================================
+2026-05-10 15:28:19 [INFO] RouletteAI: [Vision] Initializing Number Detector v5.0 (Template Matching)...
+2026-05-10 15:28:19 [INFO] RouletteAI: [TemplateMatcher] Generated 264 templates
+2026-05-10 15:28:19 [INFO] RouletteAI: [Vision] Detector ready! Template matching enabled.
+2026-05-10 15:28:19 [DEBUG] RouletteAI: [Vision] ✓ Detected 0 (green + template match)
+2026-05-10 15:28:19 [INFO] RouletteAI: [Vision] FORCE: 0 (green)
+2026-05-10 15:28:19 [DEBUG] RouletteAI: [Vision] Looks like 00: two round shapes with gap
+2026-05-10 15:28:19 [DEBUG] RouletteAI: [Vision] ✓ Detected 00 (green + double zero shape)
+2026-05-10 15:28:19 [INFO] RouletteAI: [Vision] FORCE: 00 (green)
+2026-05-10 15:28:19 [DEBUG] RouletteAI: [Vision] Template candidates: ['1'], color=red
+2026-05-10 15:28:19 [DEBUG] RouletteAI: [Vision] ✓ Exact match: 1 is red
+2026-05-10 15:28:19 [INFO] RouletteAI: [Vision] FORCE: 1 (red)
+2026-05-10 15:28:19 [DEBUG] RouletteAI: [Vision] Template candidates: ['2'], color=black
+2026-05-10 15:28:19 [DEBUG] RouletteAI: [Vision] ✓ Exact match: 2 is black
+2026-05-10 15:28:19 [INFO] RouletteAI: [Vision] FORCE: 2 (black)
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] Template candidates: ['3'], color=red
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] ✓ Exact match: 3 is red
+2026-05-10 15:28:20 [INFO] RouletteAI: [Vision] FORCE: 3 (red)
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] Template candidates: ['4'], color=black
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] ✓ Exact match: 4 is black
+2026-05-10 15:28:20 [INFO] RouletteAI: [Vision] FORCE: 4 (black)
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] Template candidates: ['5'], color=red
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] ✓ Exact match: 5 is red
+2026-05-10 15:28:20 [INFO] RouletteAI: [Vision] FORCE: 5 (red)
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] Template candidates: ['6', '8', '5'], color=black
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] ✓ Exact match: 6 is black
+2026-05-10 15:28:20 [INFO] RouletteAI: [Vision] FORCE: 6 (black)
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] Template candidates: ['7'], color=red
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] ✓ Exact match: 7 is red
+2026-05-10 15:28:20 [INFO] RouletteAI: [Vision] FORCE: 7 (red)
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] Template candidates: ['8'], color=black
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] ✓ Exact match: 8 is black
+2026-05-10 15:28:20 [INFO] RouletteAI: [Vision] FORCE: 8 (black)
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] Template candidates: ['9'], color=red
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] ✓ Exact match: 9 is red
+2026-05-10 15:28:20 [INFO] RouletteAI: [Vision] FORCE: 9 (red)
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] Template candidates: ['0'], color=black
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] ✓ Corrected: 0 → 6 (color match)
+2026-05-10 15:28:20 [INFO] RouletteAI: [Vision] FORCE: 6 (black)
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] Template candidates: ['1'], color=black
+2026-05-10 15:28:20 [WARNING] RouletteAI: [Vision] FALLBACK: using first valid black number: 2
+2026-05-10 15:28:20 [INFO] RouletteAI: [Vision] FORCE: 2 (black)
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] Template candidates: ['2'], color=red
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] ✓ Corrected: 2 → 7 (color match)
+2026-05-10 15:28:20 [INFO] RouletteAI: [Vision] FORCE: 7 (red)
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] Template candidates: ['3'], color=black
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] ✓ Corrected: 3 → 8 (color match)
+2026-05-10 15:28:20 [INFO] RouletteAI: [Vision] FORCE: 8 (black)
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] Template candidates: ['4'], color=red
+2026-05-10 15:28:20 [DEBUG] RouletteAI: [Vision] ✓ Corrected: 4 → 1 (color match)
+2026-05-10 15:28:20 [INFO] RouletteAI: [Vision] FORCE: 1 (red)
+2026-05-10 15:28:27 [INFO] RouletteAI: ============================================================
+2026-05-10 15:28:27 [INFO] RouletteAI: Log file: /workspace/logs/roulette_ai_2026-05-10.log
+2026-05-10 15:28:27 [INFO] RouletteAI: ============================================================
+2026-05-10 15:28:27 [INFO] RouletteAI: [TemplateMatcher] Generated 264 templates
+2026-05-10 15:29:00 [INFO] RouletteAI: ============================================================
+2026-05-10 15:29:00 [INFO] RouletteAI: Log file: /workspace/logs/roulette_ai_2026-05-10.log
+2026-05-10 15:29:00 [INFO] RouletteAI: ============================================================
+2026-05-10 15:29:00 [INFO] RouletteAI: [TemplateMatcher] Generated 264 templates
+2026-05-10 15:29:29 [INFO] RouletteAI: ============================================================
+2026-05-10 15:29:29 [INFO] RouletteAI: Log file: /workspace/logs/roulette_ai_2026-05-10.log
+2026-05-10 15:29:29 [INFO] RouletteAI: ============================================================
+2026-05-10 15:29:29 [INFO] RouletteAI: [Vision] Initializing Number Detector v5.0 (Template Matching)...
+2026-05-10 15:29:29 [INFO] RouletteAI: [TemplateMatcher] Generated 264 templates
+2026-05-10 15:29:29 [INFO] RouletteAI: [Vision] Detector ready! Template matching enabled.
+2026-05-10 15:29:29 [DEBUG] RouletteAI: [Vision] ✓ Detected 0 (green + template match)
+2026-05-10 15:29:29 [INFO] RouletteAI: [Vision] FORCE: 0 (green)
+2026-05-10 15:29:29 [DEBUG] RouletteAI: [Vision] Looks like 00: two round shapes with gap
+2026-05-10 15:29:29 [DEBUG] RouletteAI: [Vision] ✓ Detected 00 (green + double zero shape)
+2026-05-10 15:29:29 [INFO] RouletteAI: [Vision] FORCE: 00 (green)
+2026-05-10 15:29:29 [DEBUG] RouletteAI: [Vision] Template candidates: ['1'], color=red
+2026-05-10 15:29:29 [DEBUG] RouletteAI: [Vision] ✓ Exact match: 1 is red
+2026-05-10 15:29:29 [INFO] RouletteAI: [Vision] FORCE: 1 (red)
+2026-05-10 15:29:29 [DEBUG] RouletteAI: [Vision] Template candidates: ['2'], color=black
+2026-05-10 15:29:29 [DEBUG] RouletteAI: [Vision] ✓ Exact match: 2 is black
+2026-05-10 15:29:29 [INFO] RouletteAI: [Vision] FORCE: 2 (black)
+2026-05-10 15:29:29 [DEBUG] RouletteAI: [Vision] Template candidates: ['3'], color=red
+2026-05-10 15:29:29 [DEBUG] RouletteAI: [Vision] ✓ Exact match: 3 is red
+2026-05-10 15:29:29 [INFO] RouletteAI: [Vision] FORCE: 3 (red)
+2026-05-10 15:29:30 [DEBUG] RouletteAI: [Vision] Template candidates: ['4'], color=black
+2026-05-10 15:29:30 [DEBUG] RouletteAI: [Vision] ✓ Exact match: 4 is black
+2026-05-10 15:29:30 [INFO] RouletteAI: [Vision] FORCE: 4 (black)
+2026-05-10 15:29:30 [DEBUG] RouletteAI: [Vision] Template candidates: ['5'], color=red
+2026-05-10 15:29:30 [DEBUG] RouletteAI: [Vision] ✓ Exact match: 5 is red
+2026-05-10 15:29:30 [INFO] RouletteAI: [Vision] FORCE: 5 (red)
+2026-05-10 15:29:30 [DEBUG] RouletteAI: [Vision] Template candidates: ['6', '8', '5'], color=black
+2026-05-10 15:29:30 [DEBUG] RouletteAI: [Vision] ✓ Exact match: 6 is black
+2026-05-10 15:29:30 [INFO] RouletteAI: [Vision] FORCE: 6 (black)
+2026-05-10 15:29:30 [DEBUG] RouletteAI: [Vision] Template candidates: ['7'], color=red
+2026-05-10 15:29:30 [DEBUG] RouletteAI: [Vision] ✓ Exact match: 7 is red
+2026-05-10 15:29:30 [INFO] RouletteAI: [Vision] FORCE: 7 (red)
+2026-05-10 15:29:30 [DEBUG] RouletteAI: [Vision] Template candidates: ['8'], color=black
+2026-05-10 15:29:30 [DEBUG] RouletteAI: [Vision] ✓ Exact match: 8 is black
+2026-05-10 15:29:30 [INFO] RouletteAI: [Vision] FORCE: 8 (black)
+2026-05-10 15:29:30 [DEBUG] RouletteAI: [Vision] Template candidates: ['9'], color=red
+2026-05-10 15:29:30 [DEBUG] RouletteAI: [Vision] ✓ Exact match: 9 is red
+2026-05-10 15:29:30 [INFO] RouletteAI: [Vision] FORCE: 9 (red)
