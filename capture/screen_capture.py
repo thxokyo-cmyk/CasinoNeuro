@@ -14,7 +14,6 @@ from logger import log
 
 class ScreenCapture:
     def __init__(self, config_file: str = "capture_region.json"):
-        self.sct = mss.mss()
         self.config_file = config_file
         
         # Default region (will be overwritten by config)
@@ -55,10 +54,12 @@ class ScreenCapture:
             return None
             
         try:
-            screenshot = self.sct.grab(self.result_region)
-            img = np.array(screenshot)
-            # Convert BGRA to BGR
-            img = cv2.cvtColor(img, cv2.COLOR_BGRA2BGR)
+            # Create new MSS instance for this call (thread-safe)
+            with mss.mss() as sct:
+                screenshot = sct.grab(self.result_region)
+                img = np.array(screenshot)
+                # Convert BGRA to BGR
+                img = cv2.cvtColor(img, cv2.COLOR_BGRA2BGR)
             return img
         except Exception as e:
             log.error("[Capture] Error: " + str(e))
@@ -67,10 +68,12 @@ class ScreenCapture:
     def capture_full_screen(self) -> Optional[np.ndarray]:
         """Capture full primary monitor"""
         try:
-            monitor = self.sct.monitors[1]
-            screenshot = self.sct.grab(monitor)
-            img = np.array(screenshot)
-            img = cv2.cvtColor(img, cv2.COLOR_BGRA2BGR)
+            # Create new MSS instance for this call (thread-safe)
+            with mss.mss() as sct:
+                monitor = sct.monitors[1]
+                screenshot = sct.grab(monitor)
+                img = np.array(screenshot)
+                img = cv2.cvtColor(img, cv2.COLOR_BGRA2BGR)
             return img
         except Exception as e:
             log.error("[Capture] Full screen error: " + str(e))
@@ -78,7 +81,8 @@ class ScreenCapture:
 
     def get_monitor_info(self) -> dict:
         """Get primary monitor info"""
-        return self.sct.monitors[1]
+        with mss.mss() as sct:
+            return sct.monitors[1]
 
     def is_configured(self) -> bool:
         """Check if capture region is configured"""
