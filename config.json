@@ -1,0 +1,39 @@
+{
+    "capture": {
+        "monitor_index": 1,
+        "result_region": {
+            "left": 2499,
+            "top": 1384,
+            "width": 33,
+            "height": 30
+        },
+        "history_region": {
+            "left": 800,
+            "top": 100,
+            "width": 320,
+            "height": 40
+        },
+        "capture_interval_ms": 1500,
+        "debug_capture": true
+    },
+    "ml": {
+        "sequence_length": 20,
+        "hidden_size": 128,
+        "num_layers": 2,
+        "learning_rate": 0.001,
+        "min_spins_to_predict": 5,
+        "retrain_every_n_spins": 15
+    },
+    "gui": {
+        "opacity": 0.92,
+        "width": 450,
+        "height": 750,
+        "position_x": 10,
+        "position_y": 50
+    },
+    "hotkeys": {
+        "manual_input": "F2",
+        "force_capture": "F3",
+        "toggle_detection": "F4"
+    }
+}
