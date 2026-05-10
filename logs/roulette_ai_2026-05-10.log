@@ -197,3 +197,7 @@
 2026-05-10 15:29:30 [DEBUG] RouletteAI: [Vision] Template candidates: ['9'], color=red
 2026-05-10 15:29:30 [DEBUG] RouletteAI: [Vision] ✓ Exact match: 9 is red
 2026-05-10 15:29:30 [INFO] RouletteAI: [Vision] FORCE: 9 (red)
+2026-05-10 15:52:37 [INFO] RouletteAI: ============================================================
+2026-05-10 15:52:37 [INFO] RouletteAI: Log file: /workspace/logs/roulette_ai_2026-05-10.log
+2026-05-10 15:52:37 [INFO] RouletteAI: ============================================================
+2026-05-10 15:52:41 [INFO] RouletteAI: [ML] PyTorch loaded (CPU mode)

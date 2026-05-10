@@ -396,6 +396,10 @@ class OverlayWindow(QMainWindow):
             else:
                 QMessageBox.warning(self, "Invalid", "Enter 0-36 or 00")
 
+    def _force_capture(self):
+        """Force capture signal for F3 hotkey and Force button"""
+        self.manual_input_signal.emit("FORCE_CAPTURE")
+
     def update_status(self, text: str):
         self.status_label.setText(text)
 
